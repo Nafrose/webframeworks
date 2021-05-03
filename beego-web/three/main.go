@@ -1,11 +1,22 @@
 package main
 
 import (
-	_ "three/routers"
-	beego "github.com/beego/beego/v2/server/web"
+"github.com/beego/beego/v2/core/logs"
+"github.com/beego/beego/v2/server/web"
+)
+
+var (
+	BuildMode       = "dev"
 )
 
 func main() {
-	beego.Run()
+	web.AppConfig.Set("BuildMode", BuildMode)
+
+	val, _ := web.AppConfig.String("BuildMode")
+
+	logs.Info("load config BuildMode is", val)
+
+	web.Run()
 }
+
 
